@@ -28,4 +28,7 @@ test:
       - ./gradlew assembleAndroidTest
       - ./circle-android wait-for-boot
       - adb shell input keyevent 82
-      - ./gradlew connectedAndroidTest
+      - ./gradlew connectedAndroidTest:
+           timeout: 1200
+
+

@@ -25,10 +25,10 @@ test:
       - emulator -avd circleci-android24-googleapis -verbose -no-window -gpu swiftshader:
          background: true
          parallel: true
-      - ./gradlew assembleAndroidTest
+      - ./gradlew -PdisablePreDex assembleAndroidTest
       - ./circle-android wait-for-boot
       - adb shell input keyevent 82
-      - ./gradlew connectedAndroidTest:
+      - ./gradlew -PdisablePreDex connectedAndroidTest:
            timeout: 1200
 
 

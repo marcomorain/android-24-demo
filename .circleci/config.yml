@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-27-alpha
+    environment:
+      ANDROID_BUILD_PATH: build/app-debug.apk
+      QEMU_AUDIO_DRV: none
+    steps:
+      - checkout
+      #- run: avdmanager create avd  --name circleci24  --package "system-images;android-25;google_apis;x86"
+      - run: android list avd
+      - run:
+          command: adb logcat
+          background: true
+      #- run:
+      #    command: emulator -avd circleci-android24-googleapis -verbose -no-window -gpu swiftshader
+      #    background: true
+      - run: ./gradlew -PdisablePreDex assembleAndroidTest
+      #- run: ./circle-android wait-for-boot
+      #- run: adb shell input keyevent 82
+      #- run: ./gradlew -PdisablePreDex connectedAndroidTest
